@@ -33,7 +33,7 @@ public class AdminServiceImpl implements AdminService {
 		//Admin admin = adminRepository.findById(id).orElse(null);
 		
 		Admin admin = adminRepository.findById(id)
-					  .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, String.format("NOT FOUND with ID: %d", id)) );
+					  .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, String.format("NOT FOUND ID: %d", id)) );
 		
 		return AdminMapper.INSTANCE.toAdminDto(admin);
 	}
@@ -43,7 +43,7 @@ public class AdminServiceImpl implements AdminService {
 		
 		//Admin admin = adminRepository.findById(id).orElse(null);
 		
-		Admin admin = adminRepository.findById(id).orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, String.format("NOT FOUND with ID: %d", id)));
+		Admin admin = adminRepository.findById(id).orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, String.format("NOT FOUND ID: %d", id)));
 		
 		admin.setPassword(adminDto.getPassword());
 		admin.setUsername(adminDto.getUsername());
