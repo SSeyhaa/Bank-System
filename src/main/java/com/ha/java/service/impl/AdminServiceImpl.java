@@ -1,9 +1,11 @@
 package com.ha.java.service.impl;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.ha.java.dto.AdminDto;
 import com.ha.java.entity.Admin;
+import com.ha.java.exception.ApiException;
 import com.ha.java.mapper.AdminMapper;
 import com.ha.java.repository.AdminRepository;
 import com.ha.java.service.AdminService;
@@ -28,7 +30,10 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public AdminDto getAdmin(Long id) {
 		
-		Admin admin = adminRepository.findById(id).orElse(null);
+		//Admin admin = adminRepository.findById(id).orElse(null);
+		
+		Admin admin = adminRepository.findById(id)
+					  .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, String.format("NOT FOUND with ID: %d", id)) );
 		
 		return AdminMapper.INSTANCE.toAdminDto(admin);
 	}
@@ -36,7 +41,10 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public AdminDto putAdmin(Long id, AdminDto adminDto) {
 		
-		Admin admin = adminRepository.findById(id).orElse(null);
+		//Admin admin = adminRepository.findById(id).orElse(null);
+		
+		Admin admin = adminRepository.findById(id).orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, String.format("NOT FOUND with ID: %d", id)));
+		
 		admin.setPassword(adminDto.getPassword());
 		admin.setUsername(adminDto.getUsername());
 		
