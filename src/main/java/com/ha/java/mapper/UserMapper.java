@@ -5,6 +5,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import com.ha.java.dto.UserDto;
+import com.ha.java.entity.Branch;
 import com.ha.java.entity.User;
 
 @Mapper
@@ -17,4 +18,5 @@ public interface UserMapper {
 	
 	@Mapping(target = "branchId", source = "branch.id")
 	UserDto toUserDto(User user);
+	
 }
