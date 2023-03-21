@@ -1,7 +1,5 @@
 package com.ha.java.entity;
 
-import jakarta.annotation.Generated;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,13 +20,13 @@ public class Branch {
 	@Column(name = "branch_id")
 	private Long id;
 	
-	@Nullable
+	@Column(nullable = false)
 	private String name;
 	
-	@Nullable
+	@Column(nullable = false)
 	private String address;
 	
-	@Nullable
+	@Column(nullable = false)
 	private String city;
 	
 }

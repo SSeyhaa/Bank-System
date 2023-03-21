@@ -1,5 +1,7 @@
 package com.ha.java.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ha.java.dto.BranchDto;
+import com.ha.java.dto.UserDto;
 import com.ha.java.service.BranchService;
+import com.ha.java.service.UserService;
 
 import lombok.AllArgsConstructor;
 
@@ -22,7 +26,7 @@ import lombok.AllArgsConstructor;
 public class BranchController {
 
 	private final BranchService branchService;
-	
+	private final UserService userService;
 	
 	@PostMapping
 	public ResponseEntity<BranchDto> postBranch(@RequestBody BranchDto branchDto){
@@ -47,6 +51,13 @@ public class BranchController {
 		
 		return new ResponseEntity<BranchDto>(branchService.deleteBranch(id), HttpStatus.OK);
 	}
+	
+	@GetMapping("/{id}/users")
+	public ResponseEntity<List<UserDto>> getUsersByBranchId(@PathVariable Long id){
+		
+		return new ResponseEntity<List<UserDto>>(userService.getUsers(id), HttpStatus.OK);
+	}
+	
 	
 	
 	
