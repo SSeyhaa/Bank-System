@@ -24,12 +24,11 @@ public class UserController {
 
 	private final UserService userService;
 	
-	@PostMapping
-	public ResponseEntity<UserDto> postUser(@RequestBody UserDto userDto){
+	@PostMapping("{pinForAcc}")
+	public ResponseEntity<UserDto> postUser(@RequestBody UserDto userDto, @PathVariable String pinForAcc){
 		
-		return new ResponseEntity<UserDto>(userService.postUser(userDto), HttpStatus.OK);
+		return new ResponseEntity<UserDto>(userService.postUser(userDto, pinForAcc), HttpStatus.OK);
 	}
-	
 	
 	@GetMapping("{id}")
 	public ResponseEntity<UserDto> getUser(@PathVariable Long id){

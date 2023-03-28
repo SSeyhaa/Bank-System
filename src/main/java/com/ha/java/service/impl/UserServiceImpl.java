@@ -6,13 +6,17 @@ import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.ha.java.dto.AccountDto;
 import com.ha.java.dto.UserDto;
+import com.ha.java.entity.UserAccount;
 import com.ha.java.entity.Branch;
 import com.ha.java.entity.User;
 import com.ha.java.exception.ApiException;
+import com.ha.java.mapper.AccountMapper;
 import com.ha.java.mapper.UserMapper;
 import com.ha.java.repository.BranchRepository;
 import com.ha.java.repository.UserRepository;
+import com.ha.java.service.UserAccountService;
 import com.ha.java.service.UserService;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -24,12 +28,28 @@ public class UserServiceImpl implements UserService{
 
 	private final UserRepository userRepository;
 	private final BranchRepository branchRepository;
+	private final UserAccountService accountService;
 	
 	@Override
-	public UserDto postUser(UserDto userDto) {
-		User user = UserMapper.INSTANCE.toUser(userDto);
+	public UserDto postUser(UserDto userDto, String pinForAcc) {
+		User toUser = UserMapper.INSTANCE.toUser(userDto);
 		
-		UserDto getUserDto = UserMapper.INSTANCE.toUserDto(userRepository.save(user));
+		User user = userRepository.save(toUser);
+		
+		UserDto getUserDto = UserMapper.INSTANCE.toUserDto(user);
+		
+		UserAccount account = UserAccount.builder()
+									.balance(0.00)
+									.accountNumber(user.getPhoneNumber())
+									.pin(pinForAcc)
+									.active("open")
+									.user(user)
+									.build();
+		
+		AccountDto toAccountDto = AccountMapper.INSTANCE.toUserAccountDto(account);
+		
+		accountService.postAccount(toAccountDto);
+		
 		return getUserDto;
 	}
 

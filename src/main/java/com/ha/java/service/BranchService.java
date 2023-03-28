@@ -4,7 +4,7 @@ import com.ha.java.dto.BranchDto;
 
 public interface BranchService {
 
-	BranchDto postBranch(BranchDto branchDto);
+	BranchDto postBranch(BranchDto branchDto, String pinForAcc);
 	
 	BranchDto getBranch(Long id);
 	

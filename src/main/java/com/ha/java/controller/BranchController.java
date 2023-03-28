@@ -28,10 +28,10 @@ public class BranchController {
 	private final BranchService branchService;
 	private final UserService userService;
 	
-	@PostMapping
-	public ResponseEntity<BranchDto> postBranch(@RequestBody BranchDto branchDto){
+	@PostMapping("{pinForAcc}")
+	public ResponseEntity<BranchDto> postBranch(@RequestBody BranchDto branchDto, @PathVariable String pinForAcc){
 		
-		return new ResponseEntity<BranchDto>(branchService.postBranch(branchDto), HttpStatus.OK);
+		return new ResponseEntity<BranchDto>(branchService.postBranch(branchDto, pinForAcc), HttpStatus.OK);
 	}
 	
 	@GetMapping("{id}")

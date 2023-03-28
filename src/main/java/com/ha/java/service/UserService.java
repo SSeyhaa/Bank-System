@@ -6,7 +6,7 @@ import com.ha.java.dto.UserDto;
 
 public interface UserService {
 
-	UserDto postUser(UserDto userDto);
+	UserDto postUser(UserDto userDto, String pinForAcc);
 	
 	UserDto getUser(Long id);
 	
