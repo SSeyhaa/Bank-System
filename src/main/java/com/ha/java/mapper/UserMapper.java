@@ -8,7 +8,7 @@ import com.ha.java.dto.UserDto;
 import com.ha.java.entity.Branch;
 import com.ha.java.entity.User;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface UserMapper {
 
 	UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);

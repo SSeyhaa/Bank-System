@@ -8,7 +8,7 @@ import com.ha.java.dto.AccountDto;
 import com.ha.java.entity.BranchAccount;
 import com.ha.java.entity.UserAccount;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface AccountMapper {
 
 	AccountMapper INSTANCE = Mappers.getMapper(AccountMapper.class);
@@ -25,4 +25,5 @@ public interface AccountMapper {
 	
 	@Mapping(target = "branchId", source = "branch.id")
 	AccountDto toBranchAccountDto(BranchAccount account);
+	
 }
