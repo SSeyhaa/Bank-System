@@ -45,7 +45,7 @@ public class BranchAccountServiceImpl implements BranchAccountService{
 	}
 
 	@Override
-	public AccountDto putPinAccount(String accountNumber) {
+	public AccountDto putPinAccountByBranchId(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
